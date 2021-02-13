@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>MUVI </title>
+  </head>
+  <style>
+      /* hide button */
+
+    .razorpay-payment-button{
+        display: none;
+    }
+  </style>
+  <h1>Do Not Refresh Page</h1>
+  <body>
+               
+               <form action="/buysubscription/" method="post">{% csrf_token %}
+                    <input type="hidden" name="subscription_id" value="{{subscriptions.id}}">
+                    <input type="hidden" name="validity" value="{{subscriptions.validity}}">
+                    <input type="hidden" name="price" value="{{subscriptions.price}}">
+                    <input type="hidden" name="orderid" value="{{payment.id}}">
+    
+                    <!-- RAZORPAY INTEGRATION HERE -->
+                  <script src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_UgBzAXaVEXTtT0"
+                    data-amount="{{payment.amount}}"
+                    data-currency="INR"
+                    data-order_id="{{payment.id}}"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="{{subscriptions.title}}"
+                    data-description="Make Payment {{user.first_name}}"
+                    data-image="{{settings.image_url.url}}"
+                    data-prefill.name="{{payment.id}}"
+                    data-prefill.email="{{user.email}}"
+                    data-theme.color="#ffc107">
+                  </script>   
+              </form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+      /* It will automatically click pay button when page load*/
+      document.querySelector('.razorpay-payment-button').click();
+    </script>

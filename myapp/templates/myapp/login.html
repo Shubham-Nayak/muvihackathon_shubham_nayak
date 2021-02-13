@@ -1,0 +1,210 @@
+{%load static %}
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <meta name="description" content="We Muvi Provide OTT Platform For Content Streaming ">
+    <meta name="keywords" content="muvi,ott,muvi bhubaneswar,my ott,bhubaneswar ott app,netflix,amazonprime,online movies">
+    <link rel="icon" href="https://www.muvi.com/wp-content/themes/muvi/images/favicon.png">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="{%static 'myapp/jquery-3.4.1.min.js' %}" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" type="text/javascript"></script>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+</head>
+<style>
+    .mynav{
+        float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    }
+    .divi1{
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        $('#signup').click(function(){
+            $('.divi2').hide();
+            $('.divi1').show();
+            $(this).css('color','#f76b1e');
+            $('#login').css('color','#005be8');
+
+
+        });
+        $('#login').click(function(){
+            $('.divi1').hide();
+            $('.divi2').show();
+            $(this).css('color','#f76b1e');
+            $('#signup').css('color','#005be8');
+
+
+
+        });
+        
+
+    });
+</script>
+{%if user.is_authenticated %}
+ <script>
+    window.location.href('/');
+ </script>
+
+{% endif %}
+<body>
+
+
+
+
+
+
+<!-- Just an image -->
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="https://facts24.s3.amazonaws.com/media/ViewImageArchive.png" alt="OTT" title="OTT" alt="OTT" width="30" height="24">
+      </a>
+
+        <a href="#" style="color:#005be8; " id="signup" title="Employee Login" class="mynav">Signup</a>
+        <a href="#"  style="color:#f76b1e;" id="login" title="Parent Login" class="mynav">Login</a>
+    </div>
+  </nav>
+
+<div class="text center row mt2" style="display: flex;  justify-content: center;margin-top:20px;">
+<div class="col-md-6 m4 col-xs-12 col-sm-12 boxform boxpad" id="divtabID">
+<div class="formbox row z-depth-3" style="background: #f1f1f1;padding: 18px;">
+<div class="row diviall" id="MaindivId">
+ <div class="col m12">
+</div>
+</div>
+{{error}}
+<div class="successformdiv"></div>
+<div class="errormessageformdiv"></div>
+
+<div class="divi2">
+
+<form action="/login/" method="post" class="ajax-save-form">{% csrf_token %}
+<h5 style="padding-left: 5px; color: #532c96; text-align:center;font-weight:bold;"> Login </h5>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
+    </div>
+  
+    <button type="submit" class="btn btn-primary mt2">Submit</button>
+  </form>
+</div>
+
+<div class="divi1">
+
+
+
+  
+
+
+
+
+
+
+<form  action="/signup/" method="post">{% csrf_token %}
+<h5 style="padding-left: 5px; color: #532c96; text-align:center;font-weight:bold;"> Signup </h5>
+
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">First Name</label>
+      <input type="text" class="form-control"id="UserName" name="firstname" placeholder="First Name  " required="required">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="UserName" name="lastname" placeholder="Last Name  " required="required" >
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">UserName</label>
+        <input type="text" class="form-control" id="UserName" name="username" placeholder="UserName  " required="required">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" placeholder="Email " required="required" type="email">
+      </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="pass1" placeholder="Password  " required="required" type="password">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="pass2" placeholder="Password  " required="required" type="password">
+      </div>
+  
+    <button type="submit" class="btn btn-primary mt2">Submit</button>
+  </form>
+</div>
+</div>
+</div>
+</div>
+    
+    
+    <div class="hiddendiv common"></div></body>
+    <script>
+
+            jQuery(document).on('submit', '.ajax-save-form', function(e){
+
+                e.preventDefault();
+                var ajax_save_form = jQuery(this);
+                var formaction = ajax_save_form.attr('action');
+                jQuery('.successformdiv').html('');
+                jQuery('.errormessageformdiv').html('');
+                $.ajax({
+                  enctype: 'multipart/form-data',
+                  url: formaction,
+                  data: new FormData(this),
+                  method:'post',
+                  dataType: 'json', 
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  timeout: 600000,
+                  beforeSend: function() {
+                    $("#dcare__btn").hide();
+                    jQuery('.errormessageformdiv').html('<span style="color:#ff0000;">Please wait while form is submitting... <span>');
+                  },
+                  success : function(response) {
+                    jQuery('.successformdiv').html();
+                    jQuery('.errormessageformdiv').html('');
+                    jQuery('#submitscnow').val('Submit');
+                    if(response.status) {
+                      jQuery('.errormessageformdiv').html();
+                      jQuery('.successformdiv').html(response.message);
+                      $('.ajax-save-form')[0].reset();
+            
+                      if(response.http_redirect) {
+                        window.location.href = response.http_redirect;
+                      }
+                    } else {
+                      jQuery('.errormessageformdiv').html(response.message);
+                      jQuery('.successformdiv').html();
+                      var alert = $('div.alert[auto-close]');
+                      alert.each(function() {
+                        var that = $(this);
+                        var time_period = that.attr('auto-close');
+                        window.setTimeout(function() {
+                          that.fadeTo(500, 0).slideUp(500, function(){
+                            that.remove(); 
+                          });
+                        }, time_period);
+                      });
+                    }
+                  }
+                });
+              });
+    </script>
+    </html>
